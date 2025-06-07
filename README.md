@@ -18,8 +18,12 @@ flowchart TD
     F --> G["End: Final Output - Phylogenetic Tree & Summary Project Reports"]
 
 Parameter input
---queryseqfile	A fasta formatted file with sequences to place.
---refseqfile	Reference sequences, several popular formats supported e.g. aligned fasta and phylip. Unless when specifying an --hmmfile, the sequences needs to be aligned.
---refphylogeny	Reference phylogeny.
---model	Evolutionary model used when estimating the phylogeny, e.g. “LG+F+R6”.
-![image](https://github.com/user-attachments/assets/59c210df-6786-4e23-9d15-3724e295f1ba)
+--queryseqfile	
+    A fasta formatted file with sequences to place.
+--refseqfile	
+    Reference sequences, several popular formats supported e.g. aligned fasta and phylip. Unless when specifying an --hmmfile, the sequences needs to be aligned.
+--refphylogeny	
+    Reference phylogeny.
+--model	Evolutionary model 
+    used when estimating the phylogeny, e.g. “LG+F+R6”.
+
