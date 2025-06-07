@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	19/e4042a	-	NFCORE_PHYLOPLACE:PHYLOPLACE:FASTA_NEWICK_EPANG_GAPPA:HMMER_HMMBUILD (ajy_run1)	FAILED	-	-	-	-	-	-	-	-	-
