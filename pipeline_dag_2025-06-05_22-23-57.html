@@ -1,0 +1,218 @@
+<!--
+  ~ Copyright 2013-2024, Seqera Labs
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<pre class="mermaid" style="text-align: center;">
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#B6ECE2',
+      'primaryTextColor': '#160F26',
+      'primaryBorderColor': '#065647',
+      'lineColor': '#545555',
+      'clusterBkg': '#BABCBD22',
+      'clusterBorder': '#DDDEDE',
+      'fontFamily': 'arial'
+    }
+  }
+}%%
+flowchart TB
+    subgraph " "
+    v0["Channel.of"]
+    v1["Channel.fromPath"]
+    v10["mxfile"]
+    v47["maskfile"]
+    v57["maskfile"]
+    v88["bfastfile"]
+    v89["binaryfile"]
+    v123["ch_workflow_summary"]
+    v126["ch_methods_description"]
+    end
+    subgraph "NFCORE_PHYLOPLACE [NFCORE_PHYLOPLACE]"
+    subgraph "NFCORE_PHYLOPLACE:PHYLOPLACE [PHYLOPLACE]"
+    subgraph "NFCORE_PHYLOPLACE:PHYLOPLACE:FASTA_NEWICK_EPANG_GAPPA [FASTA_NEWICK_EPANG_GAPPA]"
+    v11(["HMMER_HMMBUILD"])
+    v23(["HMMER_UNALIGNREF"])
+    v35(["HMMER_HMMALIGNREF"])
+    v44(["HMMER_HMMALIGNQUERY"])
+    v48(["HMMER_MASKREF"])
+    v58(["HMMER_MASKQUERY"])
+    v66(["HMMER_AFAFORMATREF"])
+    v68(["HMMER_AFAFORMATQUERY"])
+    v72(["MAFFT"])
+    v76(["EPANG_SPLIT"])
+    v90(["EPANG_PLACE"])
+    v94(["GAPPA_GRAFT"])
+    v100(["GAPPA_ASSIGN"])
+    v108(["GAPPA_HEATTREE"])
+    v6(( ))
+    v7(( ))
+    v19(( ))
+    v46(( ))
+    v56(( ))
+    v78(( ))
+    v97(( ))
+    end
+    v119(["CUSTOM_DUMPSOFTWAREVERSIONS"])
+    v138(["MULTIQC"])
+    v116(( ))
+    v124(( ))
+    v132(( ))
+    v134(( ))
+    v136(( ))
+    v141(( ))
+    end
+    end
+    subgraph " "
+    v12[" "]
+    v49[" "]
+    v50[" "]
+    v51[" "]
+    v52[" "]
+    v53[" "]
+    v54[" "]
+    v59[" "]
+    v60[" "]
+    v61[" "]
+    v62[" "]
+    v63[" "]
+    v64[" "]
+    v91[" "]
+    v92["epang"]
+    v95["grafted_phylogeny"]
+    v101[" "]
+    v102[" "]
+    v103["taxonomy_per_query"]
+    v104[" "]
+    v105["taxonomy_profile"]
+    v106[" "]
+    v109[" "]
+    v110[" "]
+    v111["heattree"]
+    v112[" "]
+    v113[" "]
+    v114[" "]
+    v120[" "]
+    v121[" "]
+    v139[" "]
+    v140[" "]
+    v142[" "]
+    v144["ch_versions"]
+    end
+    v0 --> v6
+    v0 --> v7
+    v0 --> v78
+    v0 --> v97
+    v1 --> v132
+    v10 --> v11
+    v6 --> v11
+    v11 --> v12
+    v11 --> v6
+    v11 --> v19
+    v6 --> v23
+    v23 --> v6
+    v23 --> v19
+    v6 --> v35
+    v35 --> v19
+    v35 --> v46
+    v6 --> v44
+    v44 --> v19
+    v44 --> v56
+    v47 --> v48
+    v46 --> v48
+    v48 --> v66
+    v48 --> v54
+    v48 --> v53
+    v48 --> v52
+    v48 --> v51
+    v48 --> v50
+    v48 --> v49
+    v48 --> v19
+    v57 --> v58
+    v56 --> v58
+    v58 --> v68
+    v58 --> v64
+    v58 --> v63
+    v58 --> v62
+    v58 --> v61
+    v58 --> v60
+    v58 --> v59
+    v58 --> v19
+    v66 --> v19
+    v66 --> v78
+    v68 --> v19
+    v68 --> v78
+    v7 --> v72
+    v72 --> v7
+    v72 --> v19
+    v7 --> v76
+    v76 --> v19
+    v76 --> v78
+    v88 --> v90
+    v89 --> v90
+    v78 --> v90
+    v90 --> v92
+    v90 --> v94
+    v90 --> v91
+    v90 --> v108
+    v90 --> v19
+    v90 --> v97
+    v94 --> v95
+    v94 --> v19
+    v97 --> v100
+    v100 --> v106
+    v100 --> v105
+    v100 --> v104
+    v100 --> v103
+    v100 --> v102
+    v100 --> v101
+    v100 --> v19
+    v108 --> v114
+    v108 --> v113
+    v108 --> v112
+    v108 --> v111
+    v108 --> v110
+    v108 --> v109
+    v108 --> v19
+    v116 --> v119
+    v119 --> v121
+    v119 --> v120
+    v119 --> v124
+    v123 --> v124
+    v126 --> v124
+    v124 --> v138
+    v132 --> v138
+    v134 --> v138
+    v136 --> v138
+    v138 --> v140
+    v138 --> v139
+    v138 --> v116
+    v138 --> v141
+    v141 --> v142
+    v116 --> v144
+    v19 --> v116
+
+</pre>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, maxTextSize: Number.MAX_SAFE_INTEGER, maxEdges: Number.MAX_SAFE_INTEGER });
+</script>
+</body>
+</html>
