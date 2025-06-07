@@ -8,6 +8,19 @@ Research Hypothesis:
 
 The genomic analysis of Lactobacillus using nf-core/phyloplace will enable accurate phylogenetic placement and reveal distinct clustering that reflect their evolutionary relationships.
 
+Parameters
+
+--queryseqfile	
+    A fasta formatted file with sequences to place.
+    
+--refseqfile	
+    Reference sequences, several popular formats supported e.g. aligned fasta and phylip. Unless when specifying an --hmmfile, the sequences needs to be aligned.
+    
+--refphylogeny	
+    Reference phylogeny.
+--model	Evolutionary model 
+    used when estimating the phylogeny, e.g. “LG+F+R6”.
+
 ```mermaid
 flowchart TD
   A["Start: FASTA search of Lactobacillus (HMMER)"] --> B["Sequence Alignment (HMMER / Clustal Omega / MAFFT)"]
