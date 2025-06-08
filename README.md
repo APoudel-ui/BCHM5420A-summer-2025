@@ -22,6 +22,14 @@ Parameters
     used when estimating the phylogeny, e.g. “LG+F+R6”.
 
 
+    Quickstart
+nextflow run nf-core/phyloplace -r 1.0.0 \
+  --queryseqfile '/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR9860122.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/ERR485020.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR10240887.fasta' \
+  --refseqfile '/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/PROKKA_06042025.fna' \
+  --outdir /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/output/phyloplace_results \
+  -profile docker
+
+
     Pipeline Flowdiagram
 
 ```mermaid
@@ -33,10 +41,4 @@ flowchart TD
   E --> F["QC Report (MultiQC)"]
   F --> G["End: Final Output - Phylogenetic Tree & Summary Project Reports"]
 
-Quickstart
-nextflow run nf-core/phyloplace -r 1.0.0 \
-  --queryseqfile '/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR9860122.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/ERR485020.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR10240887.fasta' \
-  --refseqfile '/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/PROKKA_06042025.fna' \
-  --outdir /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/output/phyloplace_results \
-  -profile docker
 
