@@ -1,12 +1,16 @@
 ## Phylogenetic Analysis of *Lactobacillus* spp. Using nf-core/phyloplace Pipeline
 
-Introduction:
+  Introduction
 
 Lactobacilli are bacteria that colonised human body sites, particularly the digestive tract and the female genital tract. Thisorganism also play role in food industry. This project aims to analyse genome of Lactobacillus using nf-core/phyloplace, a bioinformatics best-practice analysis pipeline that performs phylogenetic placement with EPA-NG1. 
 
-Research Hypothesis: 
+Research Question:
+How do my Lactobacillus query sequences relate phylogenetically to known Lactobacillus reference sequence within an established reference tree?
+	(This will let us know whether my query isolates fall within known clades or form distinct lineages when placed on a curated phylogeny.)
 
-The genomic analysis of Lactobacillus using nf-core/phyloplace will enable accurate phylogenetic placement and reveal distinct clustering that reflect their evolutionary relationships.
+Hypothesis 
+Genomic analysis of Lactobacillus using nf core/phyloplace will enable accurate phylogenetic placement and reveal distinct clustering that reflect their evolutionary relationships.
+
 
 Parameters
 
