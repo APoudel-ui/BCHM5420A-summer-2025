@@ -2,9 +2,13 @@
 
   Introduction
 
-Lactobacilli are bacteria that colonised human body sites, particularly the digestive tract and the female genital tract. Thisorganism also play role in food industry. This project aims to analyse genome of Lactobacillus using nf-core/phyloplace, a bioinformatics best-practice analysis pipeline that performs phylogenetic placement with EPA-NG1. 
+Lactobacilli are bacteria that colonised human and animal body sites, such as the digestive tract and the female genital tract.
+Lactobacilli are among the most common probiotic found in food (such as yogurt), 
 
-Research Question:
+This project aims to analyse genome of Lactobacillus using nf-core/phyloplace, a bioinformatics best-practice analysis pipeline that performs phylogenetic placement with EPA-NG1. This pipeline performs phylogenetic placement by individually mapping query sequences onto a reference tree based on likelihood. It avoids reconstructing a full phylogeny, making it ideal for short sequences (e.g., PCR amplicons, metagenomic fragments). It is also useful for  large sequence datasets. 
+The final output includes a complete tree with both reference and query sequences, where queries are inserted at their most likely positions.
+
+Research Question
 How do my Lactobacillus query sequences relate phylogenetically to known Lactobacillus reference sequence within an established reference tree?
 	(This will let us know whether my query isolates fall within known clades or form distinct lineages when placed on a curated phylogeny.)
 
