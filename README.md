@@ -9,10 +9,12 @@ This project aims to analyse genome of Lactobacillus using nf-core/phyloplace, a
 The final output includes a complete tree with both reference and query sequences, where queries are inserted at their most likely positions.
 
 Research Question
+
 How do my Lactobacillus query sequences relate phylogenetically to known Lactobacillus reference sequence within an established reference tree?
 	(This will let us know whether my query isolates fall within known clades or form distinct lineages when placed on a curated phylogeny.)
 
 Hypothesis 
+
 Genomic analysis of Lactobacillus using nf core/phyloplace will enable accurate phylogenetic placement and reveal distinct clustering that reflect their evolutionary relationships.
 
 
