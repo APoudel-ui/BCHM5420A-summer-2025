@@ -1,6 +1,6 @@
 ## Phylogenetic Analysis of *Lactobacillus* spp. Using nf-core/phyloplace Pipeline
 
-  Introduction
+ 	 Introduction
 
 Lactobacilli are bacteria that colonised human and animal body sites, such as the digestive tract and the female genital tract.
 Lactobacilli are among the most common probiotic found in food (such as yogurt), 
@@ -8,17 +8,17 @@ Lactobacilli are among the most common probiotic found in food (such as yogurt
 This project aims to analyse genome of Lactobacillus using nf-core/phyloplace, a bioinformatics best-practice analysis pipeline that performs phylogenetic placement with EPA-NG1. This pipeline performs phylogenetic placement by individually mapping query sequences onto a reference tree based on likelihood. It avoids reconstructing a full phylogeny, making it ideal for short sequences (e.g., PCR amplicons, metagenomic fragments). It is also useful for  large sequence datasets. 
 The final output includes a complete tree with both reference and query sequences, where queries are inserted at their most likely positions.
 
-Research Question
+	Research Question
 
 How do my Lactobacillus query sequences relate phylogenetically to known Lactobacillus reference sequence within an established reference tree?
 	(This will let us know whether my query isolates fall within known clades or form distinct lineages when placed on a curated phylogeny.)
 
-Hypothesis 
+	Hypothesis 
 
 Genomic analysis of Lactobacillus using nf core/phyloplace will enable accurate phylogenetic placement and reveal distinct clustering that reflect their evolutionary relationships.
 
 
-Parameters
+	Parameters
 
 --queryseqfile	
     A fasta formatted file with sequences to place.
@@ -38,6 +38,15 @@ nextflow run nf-core/phyloplace -r 1.0.0 \
   --refseqfile '/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/PROKKA_06042025.fna' \
   --outdir /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/output/phyloplace_results \
   -profile docker
+
+	Limitations and Caveats
+
+Pipeline Execution:The nf-core/phyloplace pipeline failed to run successfully,restricting phylogenetic analysis and interpretation of evolutionary relationships.
+
+Sample Size:Because of possible space and memory constraints on laptop, only 3 samples were analyzed,limiting statistical reliability and generalizability of phylogenetic conclusions.
+
+Lack of Published Validation:No peer-reviewed studies were found using the nf-core/phyloplace pipeline, limiting confidence in its validation and scientific applicability.
+
 
 
     Pipeline Flowdiagram
