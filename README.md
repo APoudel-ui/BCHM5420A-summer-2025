@@ -41,13 +41,13 @@ nextflow run nf-core/phyloplace -r 1.0.0 \
 
 	Limitations and Caveats
 
-Pipeline Execution
+Pipeline Execution:
 The nf-core/phyloplace pipeline failed to run successfully,restricting phylogenetic analysis and interpretation of evolutionary relationships.
 
-Sample Size
+Sample Size:
 Because of possible space and memory constraints on laptop, only 3 samples were analyzed,limiting statistical reliability and generalizability of phylogenetic conclusions.
 
-Lack of Published Validation
+Lack of Published Validation:
 No peer-reviewed studies were found using the nf-core/phyloplace pipeline, limiting confidence in its validation and scientific applicability.
 
 
