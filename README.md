@@ -21,6 +21,9 @@ Parameters
 --model	Evolutionary model 
     used when estimating the phylogeny, e.g. “LG+F+R6”.
 
+
+    Pipeline Flowdiagram
+
 ```mermaid
 flowchart TD
   A["Start: FASTA search of Lactobacillus (HMMER)"] --> B["Sequence Alignment (HMMER / Clustal Omega / MAFFT)"]
