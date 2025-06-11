@@ -1,0 +1,274 @@
+# Phylogenetic Placement of *Lactobacillus* Species Using nf-core/phyloplace
+
+---
+
+## Table of Contents
+
+- [Introduction](#introduction)  
+- [Research Question & Hypothesis](#research-question--hypothesis)  
+- [Analysis and Methods](#analysis-and-methods)  
+- [Results and Visualizations](#results-and-visualizations)  
+- [Discussion](#discussion)  
+- [Future Plan](#future-plan)  
+- [Limitations & Caveats](#limitations--caveats)  
+- [References](#references)  
+
+---
+
+## Introduction
+
+This notebook guides you through reproducing the phylogenetic placement of *Lactobacillus* query sequences onto a known reference tree using the **nf-core/phyloplace** workflow. The pipeline aligns your sequences to a reference alignment, places them into a reference phylogeny, and produces outputs ready for visualization.
+
+*Lactobacilli* are bacteria that colonize human and animal body sites such as the digestive tract and female genital tract. They are among the most common probiotics found in food products like yogurt.
+
+The **nf-core/phyloplace** pipeline, developed with Nextflow, follows bioinformatics best practices to perform phylogenetic placement using EPA-NG. It utilizes Docker or Singularity containers, ensuring easy setup and enabling high reproducibility of results.
+
+To demonstrate the utility of the nf-core/phyloplace pipeline, this project performed a phylogenetic analysis of three long-read sequences from public genome samples of the *Lactobacillus* genus.
+
+---
+
+## Requirements
+
+ **Nextflow installed** (version 25.04.3.5949)
+
+  Run the following commands to download and verify Nextflow installation:
+
+  ```bash
+  wget -qO nextflow https://github.com/nextflow-io/nextflow/releases/download/v22.10.0/nextflow
+  chmod +x nextflow
+  ./nextflow -version
+
+- **Docker** (version 28.0.4, build b8034c0) for containerized execution
+
+- **Prepared input files:**
+  - Reference multiple sequence alignment (MSA)
+  - Reference phylogenetic tree
+  - Query sequences in FASTA format
+---
+
+
+# Analysis and Methods 
+
+  ## Step 1: Genomic Data Search
+
+Using the command line, I downloaded three FASTA files of *Lactobacillus* genomes generated from the Illumina sequencing platform.
+
+```bash
+wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR485/ERR485020/ERR485020.fastq.gz
+
+---
+
+## Step 2: Generation of Annotated Reference Sequences using Prokka
+
+The `nf-core/phyloplace` pipeline performs phylogenetic placement of your query sequences onto a reference tree. To do this meaningfully, it often requires annotated reference sequences or properly processed reference data.
+
+Run **Prokka** on your reference bacterial genome sequences to produce a high-quality annotated `.fna` file containing nucleotide sequences of predicted genes. This annotated `.fna` file (`PROKKA_06042025.fna`) will serve as your reference sequences (`--refseqfile`).
+
+```bash
+prokka --outdir PROKKA_run2 /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/SRR9860122_unique.fasta
+
+---
+##Step 3: Download the nf-core/phyloplace Pipeline
+
+Download the pipeline using this command:
+
+```bash
+nextflow run nf-core/phyloplace -r 2.0.0 -profile test,docker --outdir results/phyloplace_output -c local.config
+
+---
+## Step 4: Run Pipeline 
+  
+  nextflow run nf-core/phyloplace -r 1.0.0 ' ' --id ajy_run1 ' ' --queryseqfile /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR9860122.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/ERR485020.fasta ' ' --refseqfile /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/PROKKA_06042025_aligned.fna ' ' --refphylogeny /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/ref_aligned.fasta ' ' --model LG+F+R6 ' ' --outdir /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/output/phyloplace_results ' ' -profile docker ' ' -c memory_override.config
+
+  Parameter Descriptions:
+  nextflow run nf-core/phyloplace  	Executes the phyloplace pipeline from the nf-core collection.
+  -r 1.0.0	 Specifies the release version of the pipeline (1.0.0). This ensures reproducibility by fixing the pipeline version.
+  --id ajy_run1	  Assigns a unique identifier to my run. This helps label outputs and logs.
+  --queryseqfile	Comma-separated paths to the query sequences (your Lactobacillus genomes in FASTA format) that I want to place on the reference tree.
+  --refseqfile	Path to the reference sequences (in FASTA format). These should be previously annotated genomes (e.g., from PROKKA).
+  --refphylogeny	Path to the reference multiple sequence alignment FASTA file. This is used to construct or support the reference phylogenetic tree.
+  --model LG+F+R6	Specifies the substitution model used for phylogenetic placement. 
+  -profile docker
+  -c memory_override.config This tells Nextflow to load a custom config file that overrides default resource settings.
+  
+This file (memory_override.config) may contain entries like:
+  process {
+  withName: 'some_process' {
+    cpus = 4
+    memory = '8 GB'
+    time = '2h'
+  }
+}
+
+---
+## Step 5: Quality Control with FastQC
+
+**FastQC** is a widely used tool for assessing the quality of raw sequencing data. It generates detailed reports covering:
+- Per-base sequence quality scores
+- GC content distribution
+- Adapter contamination detection
+- Sequence duplication levels
+- And other important quality metrics
+
+Running FastQC **prior to downstream analyses** such as genome assembly or annotation is essential to:
+- Verify data quality
+- Detect sequencing artifacts or biases
+- Decide whether trimming or cleaning is required to improve results
+
+### Command Used
+```bash
+fastqc /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/SRR9860122.fastq \
+       /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/ERR485020.fastq \
+       /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/SRR10240887.fastq \
+       -o /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastqc_results
+---
+
+## Step 6: Sequence Type Identification Using BLAST
+
+In microbial genomics, **Sequence Typing** is a method to classify bacterial isolates into specific types or strains by comparing sequences of conserved housekeeping genes or marker regions. This classification helps to:
+
+- Understand the strain or lineage of your bacterial sample
+- Track epidemiology and outbreaks
+- Investigate evolutionary relationships
+- Compare your isolate to known reference types in public databases
+
+### BLAST+ Command 
+
+The following command runs a nucleotide BLAST (`blastn`) search of the sample sequence against a local **16S ribosomal RNA** database to identify closely related sequences and potential sequence types.
+
+```bash
+blastn -query fasta/SRR9860122.fasta \
+       -db 16S_ribosomal_RNA \
+       -out seqtype_SRR9860122.txt \
+       -outfmt "6 qseqid sseqid pident length evalue bitscore stitle" \
+       -max_target_seqs 5 \
+       -num_threads 2
+
+---
+
+## Results and Visualizations
+
+## Nextflow Workflow Report: Execution Failure
+  Workflow ID 
+  **[modest_yalow]**
+  
+  ## Execution Status
+  **Workflow execution completed unsuccessfully**
+
+###  Exit Code
+- **Exit status of failing task:** `7`
+
+###  Failing Process
+```text
+NFCORE_PHYLOPLACE:PHYLOPLACE:FASTA_NEWICK_EPANG_GAPPA:HMMER_UNALIGNREF (ajy_run1)
+  
+ 
+## FastQC Results: `ERR485020.fastq`
+
+| Module                           | Status |
+|----------------------------------|--------|
+| Basic Statistics                 | ✅ PASS |
+| Per base sequence quality        | ✅ PASS |
+| Per sequence quality scores      | ✅ PASS |
+| Per base sequence content        | ⚠️ WARN |
+| Per sequence GC content          | ✅ PASS |
+| Per base N content               | ✅ PASS |
+| Sequence Length Distribution     | ✅ PASS |
+| Sequence Duplication Levels      | ⚠️ WARN |
+| Overrepresented sequences        | ✅ PASS |
+| Adapter Content                  | ✅ PASS |
+
+### Interpretation
+
+- ✅ Most quality metrics passed, indicating the data is generally of good quality.
+- ⚠️ **Warnings**:
+  - **Per base sequence content**: Slight bias in base composition at the beginning of reads. This is common with random hexamer priming and typically not a major concern unless extreme.
+  - **Sequence duplication levels**: May suggest over-sequencing or the presence of highly abundant sequences (e.g., plasmids or repeats). Consider further analysis if duplication is very high.
+  *No major red flags were observed. The data is suitable for downstream analysis, although trimming or deduplication could be considered if issues persist across multiple samples.*
+
+---
+## Project Summary (Discussion)
+
+### Pipeline Execution Attempt
+
+The project attempted to run the `nf-core/phyloplace` pipeline for phylogenetic placement of bacterial genomes. However, technical issues—possibly related to configuration, memory constraints, or input formatting—prevented successful execution of the pipeline. As a result, phylogenetic tree generation and placement analysis were not completed as intended.
+
+### Successfully Completed Tasks
+
+- **Genome Annotation**  
+  Successfully annotated the genome sequences using **PROKKA**, producing annotated `.gff`, `.fna`, and `.faa` files.
+
+- **Sequence Quality Assessment**  
+  Performed quality control using **FastQC**, ensuring input sequences met the basic standards for downstream analysis.
+
+- **Sequence Typing**  
+  Conducted sequence typing using **BLAST+**, allowing for sequence typing of the input genomes.
+
+### Project Management with GitHub
+
+A remote **GitHub repository** was created to organize and track project-related code, pipeline configurations, input/output files, and documentation. Version control through GitHub ensured reproducibility, collaboration readiness, and transparent project evolution.
+
+---
+
+## Future Diresctions
+Next Steps for Pipeline Improvement and Extended Analysis
+
+### 1. Retry nf-core/phyloplace with Corrected Configuration
+- Re-run the pipeline using updated and verified command-line syntax based on nf-core guidelines.
+- Ensure correct formatting of parameters and paths.
+- Use the `-profile docker` or `-profile singularity` for consistent environments.
+- Set resources using `-c memory_override.config` with appropriate CPU and memory allocation.
+
+### 2. Optimize Workflow Execution
+- Validate all input FASTA and reference files for correct formatting.
+- Use `nextflow validate` to confirm configuration integrity.
+- If local computing resources are insufficient, consider:
+  - Cloud-based execution via AWS Batch or Google Cloud
+- Enable caching and resume functionality to avoid redundant runs.
+
+### 3.  Explore Alternative Phylogenetic Tools
+- Compare nf-core/phyloplace results with outputs from other tools:
+  - **BEAST** – for Bayesian evolutionary analysis
+  - **IQ-TREE** – for fast and efficient phylogenetic inference
+  - **PhyloPhlAn** – for strain-level phylogeny using whole-genome data
+- Evaluate performance, tree quality, and ease of use.
+
+### 4. Conduct Extended Genomic Analysis
+- Perform **antimicrobial resistance (AMR)** gene screening using:
+  - `ResFinder`, `CARD`, or `AMRFinderPlus`
+- Identify virulence factors, resistance markers, and mobile genetic elements.
+- Integrate annotation tools such as **Prokka**, **Abricate**, and **Roary** for pan-genome insights.
+
+---
+##  Limitations of the Current Analysis
+
+### Pipeline Execution
+The `nf-core/phyloplace` pipeline failed to complete successfully, which restricted the downstream phylogenetic analysis and hindered meaningful interpretation of evolutionary relationships between the studied bacterial genomes.
+
+### Limited Sample Size
+Due to space and memory constraints on the local laptop environment, only **three genome samples** were included in the analysis. This small sample size limits:
+- Statistical power of the phylogenetic inferences
+- Generalizability of conclusions across broader taxa or strains
+
+### Lack of Published Validation
+Currently, there is a lack of peer-reviewed publications using the `nf-core/phyloplace` pipeline. This limits:
+- Confidence in its validation and scientific robustness
+- Comparability with other well-established phylogenetic tools (e.g., BEAST, IQ-TREE)
+---
+### Scientific References
+
+- **Ewels et al. (2020)**  
+  *The nf-core framework for community-curated bioinformatics pipelines.*  
+  *Nature Biotechnology, 38(3), 276–278.*  
+  [https://doi.org/10.1038/s41587-020-0439-x](https://doi.org/10.1038/s41587-020-0439-x)
+
+- **Petit & Read (2020)**  
+  *Bactopia: a Flexible Pipeline for Complete Analysis of Bacterial Genomes.*  
+  *mSystems, 5(4):e00190-20.*  
+  [https://doi.org/10.1128/mSystems.00190-20](https://doi.org/10.1128/mSystems.00190-20)
+
+- **nf-core/phyloplace GitHub Repository**  
+  [https://github.com/nf-core/phyloplace](https://github.com/nf-core/phyloplace)
+
+- **Advanced Bioinformatics (BCHM5420A) – Summer 2025 GitHub Repository**  
+  [https://githu]()
