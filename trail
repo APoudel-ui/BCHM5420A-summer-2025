@@ -1,0 +1,34 @@
+curl -s https://get.nextflow.io | bash
+chmod +x nextflow
+sudo mv nextflow /usr/local/bin/
+nextflow -version
+
+git clone https://github.com/nf-core/phyloplace.git
+
+nextflow run nf-core/phyloplace -r 1.0.0 ' ' --id ajy_run1 ' ' --queryseqfile /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR9860122.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/ERR485020.fasta,/Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fasta/SRR10240887.fasta ' ' --refseqfile /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/PROKKA_06042025.fna ' ' --refphylogeny /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/PROKKA_06042025/ref_aligned.fasta ' ' --model LG+F+R6 ' ' --outdir /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/output/phyloplace_results ' ' -profile docker
+
+conda install -c bioconda prokka
+
+prokka --version
+
+ls -l /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/
+
+
+
+``bash
+prokka --outdir PROKKA_run2 /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/SRR9860122_unique.fasta
+
+
+
+```bash
+fastqc /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/SRR9860122.fastq \
+       /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/ERR485020.fastq \
+       /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastq/SRR10240887.fastq \
+       -o /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastqc_results
+       
+      unzip -p /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastqc_results/ERR485020_fastqc.zip ERR485020_fastqc/fastqc_data.txt | less
+
+open /Users/ajy_25yahoo.com/Desktop/Advance_BioInformatic_Project_Test/fastqc_results/ERR485020_fastqc.html
+
+
+
